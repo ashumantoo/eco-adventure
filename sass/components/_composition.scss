@@ -1,0 +1,67 @@
+.composition {
+  position: relative;
+
+  &__photo {
+    width: 55%;
+    box-sizing: 0 1.5rem 4rem rgba($color-black, .4);
+    border-radius: 2px;
+    position: absolute;
+    z-index: 10;
+    // do the animation all but border-radius
+    transition: all .2s, border-radius 1ms;
+    outline-offset: 2rem;
+
+    @include respond(tab-port) {
+      float: left;
+      position: relative;
+      width: 33.33333%;
+      box-sizing: 0 1.5rem 3rem rgba($color-black, .2);
+    }
+
+    // arranging all the 3 images to different place given different position inside the container using --p1,--p2,--p3 class
+    &--p1 {
+      left: 0;
+      top: -2rem;
+
+      @include respond(tab-port) {
+        top: 0;
+        transform: scale(1.2);
+      }
+    }
+
+    &--p2 {
+      right: 0;
+      top: 2rem;
+
+      @include respond(tab-port) {
+        top: -1rem;
+        transform: scale(1.3);
+        z-index: 1000;
+      }
+    }
+
+    &--p3 {
+      left: 20%;
+      top: 10rem;
+
+      @include respond(tab-port) {
+        top: 1rem;
+        left: 0;
+        transform: scale(1.1);
+      }
+    }
+
+    &:hover {
+      outline: 1.5rem solid $medium-green;
+      border-radius: 0;
+      transform: scale(1.05) translateY(-.5rem);
+      z-index: 20;
+      box-shadow: 0 2.5rem 4rem rgba($color-black, .5);
+    }
+  }
+
+  //hover on the container and then select the images which are not hovered and reduced the size using scale
+  &:hover &__photo:not(:hover) {
+    transform: scale(.95);
+  }
+}

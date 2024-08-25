@@ -1,0 +1,112 @@
+.form {
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    font-size: 1.5rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba($color-white, .5);
+    border: none;
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all 0.3s;
+
+    @include respond(tab-port){
+      width: 100%;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-white, .1);
+      border-bottom: 3px solid $medium-green;
+
+      // checking the invalid state of the input and styling the border but only when the input is on focus
+      &:invalid {
+        border-bottom: 3px solid $color-secondry-dark;
+      }
+    }
+
+    // to style the input placeholder
+    &::-webkit-input-placeholder {
+      color: $color-dark-grey-2;
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+    transition: all 0.3s;
+  }
+
+  // style applies only when the input placeholder is shown and label is an adjacent (+) child of the input
+  // + adjacent sibiling selector, by using this selector we are moving the input phaceholder in the palace of label 
+  //as soon as we start typing in the input box through transistion property
+  &__input:placeholder-shown+&__label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+
+    @include respond(tab-port){
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  // hide the default radio button since we have implemented our own
+  &__radio-input {
+    display: none;
+  }
+
+  //Our own Radio button style using span and hiding the html default radio button
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $medium-green;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -.5rem;
+
+    &::after {
+      content: "";
+      display: block;
+      height: 1rem;
+      width: 1rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $medium-green;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+
+  // Styling the selected radio button dot inside the circle
+  // Whenever we select a radio label element the input becomes checked and then we selects the sibling of that i.e radio-label and after that we are selecting child of radio-label i.e raido-button
+  &__radio-input:checked~&__radio-label &__radio-button::after {
+    opacity: 1;
+  }
+}

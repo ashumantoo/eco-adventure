@@ -1,0 +1,110 @@
+.btn {
+
+  // this & for <button> element because button doesn't have link and visited state so those sytle will not apply on <button>
+  &,
+  // Pseudo class of a tag this defines the diff states of the a tag */
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1.5rem 4rem;
+    // Putting random very large value for radium to make button complete circle */
+    border-radius: 12rem;
+    transition: all 0.2s;
+    position: relative;
+    font-size: 1.6rem;
+
+    // change for <button> element
+    border: none;
+    cursor: pointer;
+  }
+
+  //path = btn:hover
+  &:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+
+    // when button is in hover state then this will create one pseudo element 
+    // path will be .btn:hover::after
+    &::after {
+      // transform: scaleX(1.5);
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    transform: translateY(-1px);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+  }
+
+  // path = btn--white
+  &--white {
+    background-color: $color-white;
+    color: $color-dark-grey;
+
+    //path = btn--white::after
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &--green {
+    background-color: $medium-green;
+    color: $color-white;
+
+    //path = btn--white::after
+    &::after {
+      background-color: $medium-green;
+    }
+  }
+
+  &::after {
+    content: "";
+    display: inline-block;
+    // width/height will defined as per the parent element and the parent element is .btn means a tag 
+    width: 100%;
+    height: 100%;
+    // positioning is used to hide the ::after pseudo element really behind the a tag(actual button) and this will be relative to .btn 
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 12rem;
+    // z-index to put this pseudo element behind the actual button otherwise it will be visible on top of the actual button and actual button will go behind the pseduo element
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animated {
+    // 4th value is delay 
+    animation: moveFromBottom 0.5s ease-out 0.75;
+  }
+}
+
+.btn-text {
+
+  &:link,
+  &:visited {
+    font-size: $default-font-size;
+    color: $medium-green;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 1px solid $medium-green;
+    padding: 3px;
+  }
+
+  &:hover {
+    background-color: $medium-green;
+    color: $color-white;
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.15);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15);
+    transform: translateY(0);
+  }
+}
