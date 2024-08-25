@@ -160,7 +160,10 @@
   }
 
 
-  @include respond(tab-port) {
+  //This piece of style applies if the device screen is smaller than 56.25em or whenever we are using a device when we can not
+  //touch basically means we have a device which uses touch as primary input
+  @media only screen and (max-width:56.25em),
+  only screen and (hover:none) {
     height: auto;
     border-radius: 3rem;
     background-color: $color-white;
@@ -182,7 +185,7 @@
       transform: rotateY(0);
     }
 
-    &__details{
+    &__details {
       padding: 1rem 3rem;
     }
 
